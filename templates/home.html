@@ -1,0 +1,13 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<h1 style="text-align: center;">WELCOME TO Meme Hub!</h1>
+<h2 style="text-align: center;">Made by Ayu/Soft Games</h2>
+<h3 style="text-align: center;" >Specifically speaking Ayushman Samal</h3>
+{% for meme in memes%}
+<div class="meme">
+    <img src="{{url_for('static', filename = 'uploads/' + meme.filename)}}" alt="Funny Meme">
+    <p>Uploader: {{ meme.uploader_name }}</p>
+</div>
+{%endfor%}
+{%endblock%}
