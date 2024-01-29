@@ -1,4 +1,4 @@
 Flask
 Flask-SQLAlchemy
-pyrebase
+pyrebase4
 urllib3
