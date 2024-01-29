@@ -6,7 +6,7 @@
 <h3 style="text-align: center;" >Specifically speaking Ayushman Samal</h3>
 {% for meme in memes%}
 <div class="meme">
-    <img src="{{url_for('static', filename = 'uploads/' + meme.filename)}}" alt="Funny Meme">
+    <img src="{{meme.filename}}" alt="Funny Meme">
     <p>Uploader: {{ meme.uploader_name }}</p>
 </div>
 {%endfor%}

@@ -95,3 +95,44 @@ header img {
     margin-left: 10px;
     border-radius: 25%;
 }
+#menuButton{
+    visibility: hidden;
+}
+@media only screen and (max-width: 600px) {
+    nav a {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      z-index: 998;
+    }
+    #menuButton {
+        display: block;
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        visibility: visible;
+      }
+
+      #menu {
+        display: none;
+        position: absolute;
+        top: 60px; /* Adjust the top position as needed */
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        text-align: center;
+        z-index: 998;
+      }
+
+      #menu a {
+        display: block;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+      }
+  }
+
+

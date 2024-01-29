@@ -2,6 +2,23 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import os
+import pyrebase
+
+firebaseConfig = {
+  "apiKey": "AIzaSyAs-i5_c7iSqZs88U7xscV5T18pDkDdE7w",
+  "authDomain": "memehub-db3bb.firebaseapp.com",
+  "projectId": "memehub-db3bb",
+  "storageBucket": "memehub-db3bb.appspot.com",
+  "messagingSenderId": "1025202043089",
+  "appId": "1:1025202043089:web:13f45e512358bc9a822df0",
+  "measurementId": "G-PY47KSV4G6",
+  "databaseURL": ""
+}
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+
+storage = firebase.storage()
+
 
 app = Flask(__name__)
 
@@ -31,7 +48,7 @@ with app.app_context():
 @app.route('/home')
 def home():
     title="MemeHub"
-    memes = Meme.query.all() 
+    memes = Meme.query.all()
     return render_template("home.html", title=title, memes = memes)
 @app.route('/<meme_type>')
 def display_images_by_type(meme_type):
@@ -48,11 +65,14 @@ def upload():
         file = request.files['memeImage']
 
         file_name=secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
+        # file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
 
-        file.save(file_path)
+        # file.save(file_path)
 
-        meme = Meme(uploader_name=uploader_name, meme_type = meme_type, filename=file_name)
+        storage.child(f'uploads/{file_name}').put(file)
+        url=storage.child(f'uploads/{file_name}').get_url(None)
+
+        meme = Meme(uploader_name=uploader_name, meme_type = meme_type, filename=url)
         db.session.add(meme)
         db.session.commit()
         print(meme_type)

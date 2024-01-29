@@ -2,9 +2,9 @@
 
 {%block content%}
 <h1 style="text-align: center;">Memes - {{ meme_type }}</h1>
-    <div>
+    <div class="meme">
         {% for meme in memes %}
-            <img src="{{ url_for('static', filename='uploads/' + meme.filename) }}" alt="{{ meme.filename }}">
+            <img src="{{meme.filename}}" alt="{{ meme.filename }}">
             <p>Uploader: {{ meme.uploader_name }}</p>
         {% endfor %}
     </div>
